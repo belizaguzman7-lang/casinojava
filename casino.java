@@ -1,280 +1,314 @@
-// Source code is decompiled from a .class file using FernFlower decompiler (from Intellij IDEA).
-import java.util.Random;
 import java.util.Scanner;
+import java.util.Random;
 
-public class avanzado {
-   public avanzado() {
-   }
+public class casino {
+    public static void main(String[] args) {
+        Scanner teclado = new Scanner(System.in);
+        Random random = new Random();
+        int monedas = 100;
+        int partidas = 0;
+        int victorias = 0;
+        int derrotas = 0;
+        int opcion = 0;
+        while (opcion != 8) {
+            System.out.println("==================");
+            System.out.println("     CASINO JAVA  ");
+            System.out.println("==================");
+            System.out.println("Monedas: " + monedas);
+            System.out.println("1.Lanzar Dado");
+            System.out.println("2.Lanzar Moneda");
+            System.out.println("3.Tragamoneda");
+            System.out.println("4.Ruleta");
+            System.out.println("5.Piedra, Papel o Tijera");
+            System.out.println("6.Carrera de Caballos");
+            System.out.println("7.Ver estadísticas");
+            System.out.println("8.Salir");
+            opcion = teclado.nextInt();
+            switch (opcion) {
+                case 1:
+                    if (monedas >= 10) {
+                        monedas -= 10;
+                        partidas++;
+                        System.out.println("Lanzando dado...");
+                        int dado = random.nextInt(6) + 1;
+                        System.out.println("El dado cayó en: " + dado);
+                        if (dado == 6) {
+                            victorias++;
+                            monedas += 30;
+                            System.out.println("¡Ganaste 30 monedas!");
+                        } else if (dado == 5) {
+                            victorias++;
+                            monedas += 20;
+                            System.out.println("¡Ganaste 20 monedas!");
+                        } else if (dado == 4) {
+                            victorias++;
+                            monedas += 10;
+                            System.out.println("¡Ganaste 10 monedas!");
+                        } else {
+                            derrotas++;
+                            System.out.println("Perdiste.");
+                        }
+                        System.out.println("monedas actuales: " + monedas);
+                    } else {
+                        System.out.println("Falta de monedas, no puedes jugar.");
+                    }
+                    break;
+                case 2:
+                    if (monedas >= 10) {
+                        monedas -= 10;
+                        partidas++;
+                        System.out.println("1. Cara");
+                        System.out.println("2. Sello");
+                        int jugador = teclado.nextInt();
+                        System.out.println("Lanzando moneda...");
+                        int computadora = random.nextInt(2) + 1;
+                        if (computadora == jugador) {
+                            monedas += 20;
+                            victorias++;
+                            System.out.println("Ganaste.");
+                        } else {
+                            derrotas++;
+                            System.out.println("Perdiste.");
+                        }
+                        System.out.println("monedas actuales: " + monedas);
+                    } else {
+                        System.out.println("Falta de monedas, no puedes jugar.");
+                    }
+                    break;
+                case 3:
+                    if (monedas >= 10) {
+                        monedas -= 10;
+                        partidas++;
+                        int s1 = random.nextInt(5) + 1;
+                        int s2 = random.nextInt(5) + 1;
+                        int s3 = random.nextInt(5) + 1;
+                        switch (s1) {
+                            case 1:
+                                System.out.print("1");
+                                break;
+                            case 2:
+                                System.out.print("2");
+                                break;
+                            case 3:
+                                System.out.print("3");
+                                break;
+                            case 4:
+                                System.out.print("4");
+                                break;
+                            case 5:
+                                System.out.print("5");
+                                break;
+                        }
+                        switch (s2) {
+                            case 1:
+                                System.out.print("1");
+                                break;
+                            case 2:
+                                System.out.print("2");
+                                break;
+                            case 3:
+                                System.out.print("3");
+                                break;
+                            case 4:
+                                System.out.print("4");
+                                break;
+                            case 5:
+                                System.out.print("5");
+                                break;
+                        }
+                        switch (s3) {
+                            case 1:
+                                System.out.print("1");
+                                break;
+                            case 2:
+                                System.out.print("2");
+                                break;
+                            case 3:
+                                System.out.print("3");
+                                break;
+                            case 4:
+                                System.out.print("4");
+                                break;
+                            case 5:
+                                System.out.print("5");
+                                break;
+                        }
+                        System.out.println();
+                        if (s1 == s2 && s2 == s3) {
+                            monedas += 100;
+                            victorias++;
+                            System.out.println("¡¡JACKPOT!!");
+                            System.out.println("¡Ganaste 100 monedas!");
+                        } else if (s1 == s2 || s2 == s3 || s1 == s3) {
+                            monedas += 30;
+                            victorias++;
+                            System.out.println("¡Ganaste 30 monedas!");
+                        } else {
+                            derrotas++;
+                            System.out.println("Perdiste.");
+                        }
+                    } else {
+                        System.out.println("Falta de monedas, no puedes jugar.");
+                    }
+                    break;
+                case 4:
+                    if (monedas >= 10) {
+                        monedas -= 10;
+                        partidas++;
+                        System.out.println("Ruleta");
+                        System.out.print("Apostar un número (0-36): ");
+                        int apuesta = teclado.nextInt();
 
-   public static void main(String[] var0) {
-      Scanner var1 = new Scanner(System.in);
-      Random var2 = new Random();
-      int var3 = 100;
-      int var4 = 0;
-      int var5 = 0;
-      int var6 = 0;
-      int var7 = 0;
+                        while (apuesta < 0 || apuesta > 36) {
+                            System.out.print("Número invalido. Ingrese un numero entre 0 y 36: ");
+                            apuesta = teclado.nextInt();
+                        }
 
-      while(var7 != 8) {
-         System.out.println("==================");
-         System.out.println("     CASINO JAVA  ");
-         System.out.println("==================");
-         System.out.println("Monedas: " + var3);
-         System.out.println("1.Lanzar Dado");
-         System.out.println("2.Lanzar Moneda");
-         System.out.println("3.Tragamoneda");
-         System.out.println("4.Ruleta");
-         System.out.println("5.Piedra, Papel o Tijera");
-         System.out.println("6.Carrera de Caballos");
-         System.out.println("7.Ver estadísticas");
-         System.out.println("8.Salir");
-         var7 = var1.nextInt();
-         switch (var7) {
-            case 1:
-               if (var3 >= 10) {
-                  var3 -= 10;
-                  ++var4;
-                  System.out.println("Lanzando dado...");
-                  int var18 = var2.nextInt(6) + 1;
-                  System.out.println("El dado cayó en: " + var18);
-                  if (var18 == 6) {
-                     ++var5;
-                     var3 += 30;
-                     System.out.println("¡Ganaste 30 monedas!");
-                  } else if (var18 == 5) {
-                     ++var5;
-                     var3 += 20;
-                     System.out.println("¡Ganaste 20 monedas!");
-                  } else if (var18 == 4) {
-                     ++var5;
-                     var3 += 10;
-                     System.out.println("¡Ganaste 10 monedas!");
-                  } else {
-                     ++var6;
-                     System.out.println("Perdiste.");
-                  }
+                        int ruleta = random.nextInt(37); 
+                        System.out.println("La ruleta cayo en: " + ruleta);
 
-                  System.out.println("monedas actuales: " + var3);
-               } else {
-                  System.out.println("Falta de monedas, no puedes jugar.");
-               }
-               break;
-            case 2:
-               if (var3 >= 10) {
-                  var3 -= 10;
-                  ++var4;
-                  System.out.println("1. Cara");
-                  System.out.println("2. Sello");
-                  int var17 = var1.nextInt();
-                  System.out.println("Lanzando moneda...");
-                  int var22 = var2.nextInt(2) + 1;
-                  if (var22 == var17) {
-                     var3 += 20;
-                     ++var5;
-                     System.out.println("Ganaste.");
-                  } else {
-                     ++var6;
-                     System.out.println("Perdiste.");
-                  }
+                        if (apuesta == ruleta) {
+                            monedas += 100;
+                            victorias++;
+                            System.out.println("¡Adivinaste! Ganaste 100 monedas.");
+                        } else {
+                            derrotas++;
+                            System.out.println("No adivinaste.");
+                        }
+                        System.out.println("Monedas actuales: " + monedas);
+                    } else {
+                        System.out.println("No tienes suficientes monedas para jugar.");
+                    }
+                    break;
+                case 5:
+                    if (monedas >= 10) {
+                        monedas -= 10;
+                        partidas++;
 
-                  System.out.println("monedas actuales: " + var3);
-               } else {
-                  System.out.println("Falta de monedas, no puedes jugar.");
-               }
-               break;
-            case 3:
-               if (var3 >= 10) {
-                  var3 -= 10;
-                  ++var4;
-                  int var16 = var2.nextInt(5) + 1;
-                  int var21 = var2.nextInt(5) + 1;
-                  int var23 = var2.nextInt(5) + 1;
-                  switch (var16) {
-                     case 1 -> System.out.print("1");
-                     case 2 -> System.out.print("2");
-                     case 3 -> System.out.print("3");
-                     case 4 -> System.out.print("4");
-                     case 5 -> System.out.print("5");
-                  }
+                        System.out.println("PIEDRA, PAPEL O TIJERA");
+                        System.out.println("1. Piedra");
+                        System.out.println("2. Papel");
+                        System.out.println("3. Tijera");
+                        System.out.print("Elige una opción: ");
+                        int jugador = teclado.nextInt();
 
-                  switch (var21) {
-                     case 1 -> System.out.print("1");
-                     case 2 -> System.out.print("2");
-                     case 3 -> System.out.print("3");
-                     case 4 -> System.out.print("4");
-                     case 5 -> System.out.print("5");
-                  }
+                        int computadora = random.nextInt(3) + 1;
 
-                  switch (var23) {
-                     case 1 -> System.out.print("1");
-                     case 2 -> System.out.print("2");
-                     case 3 -> System.out.print("3");
-                     case 4 -> System.out.print("4");
-                     case 5 -> System.out.print("5");
-                  }
+                        System.out.print("La computadora eligió: ");
+                        switch (computadora) {
+                            case 1:
+                                System.out.println("Piedra");
+                                break;
+                            case 2:
+                                System.out.println("Papel");
+                                break;
+                            case 3:
+                                System.out.println("Tijera");
+                                break;
+                        }
 
-                  System.out.println();
-                  if (var16 == var21 && var21 == var23) {
-                     var3 += 100;
-                     ++var5;
-                     System.out.println("¡¡JACKPOT!!");
-                     System.out.println("¡Ganaste 100 monedas!");
-                     break;
-                  }
+                        if (jugador == computadora) {
+                            monedas += 10;
+                            System.out.println("Empate.");
+                        } else if ((jugador == 1 && computadora == 3) ||
+                                (jugador == 2 && computadora == 1) ||
+                                (jugador == 3 && computadora == 2)) {
+                            victorias++;
+                            monedas += 20;
+                            System.out.println("¡Ganaste 20 monedas!");
+                        } else {
+                            derrotas++;
+                            System.out.println("Perdiste.");
+                        }
 
-                  if (var16 != var21 && var21 != var23 && var16 != var23) {
-                     ++var6;
-                     System.out.println("Perdiste.");
-                     break;
-                  }
+                        System.out.println("Monedas actuales: " + monedas);
 
-                  var3 += 30;
-                  ++var5;
-                  System.out.println("¡Ganaste 30 monedas!");
-                  break;
-               }
+                    } else {
+                        System.out.println("Falta de monedas, no puedes jugar.");
+                    }
+                    break;
+                case 6:
+                    if (monedas < 10) {
+                        System.out.println("No tienes suficientes monedas.");
+                        break;
+                    }
+                    monedas -= 10;
+                    partidas++;
+                    System.out.println("CARRERA DE CABALLOS ");
+                    System.out.print("Elige un caballo (1-5): ");
+                    int caballo = teclado.nextInt();
 
-               System.out.println("Falta de monedas, no puedes jugar.");
-               break;
-            case 4:
-               if (var3 < 10) {
-                  System.out.println("No tienes suficientes monedas para jugar.");
-                  break;
-               }
+                    while (caballo < 1 || caballo > 5) {
+                        System.out.print("Elige un número válido (1-5): ");
+                        caballo = teclado.nextInt();
+                    }
+                    teclado.nextLine();
+                    int[] posiciones = new int[5];
+                    int meta = 20;
+                    int ganador = 0;
+                    System.out.println("¡Comienza la carrera!");
 
-               var3 -= 10;
-               ++var4;
-               System.out.println("Ruleta");
-               System.out.print("Apostar un número (0-36): ");
+                    while (ganador == 0) {
 
-               int var15;
-               for(var15 = var1.nextInt(); var15 < 0 || var15 > 36; var15 = var1.nextInt()) {
-                  System.out.print("Número invalido. Ingrese un numero entre 0 y 36: ");
-               }
+                        for (int i = 0; i < 5; i++) {
+                            posiciones[i] += random.nextInt(3) + 1;
 
-               int var20 = var2.nextInt(37);
-               System.out.println("La ruleta cayo en: " + var20);
-               if (var15 == var20) {
-                  var3 += 100;
-                  ++var5;
-                  System.out.println("¡Adivinaste! Ganaste 100 monedas.");
-               } else {
-                  ++var6;
-                  System.out.println("No adivinaste.");
-               }
+                            System.out.print("Caballo " + (i + 1) + ": ");
 
-               System.out.println("Monedas actuales: " + var3);
-               break;
-            case 5:
-               if (var3 >= 10) {
-                  var3 -= 10;
-                  ++var4;
-                  System.out.println("PIEDRA, PAPEL O TIJERA");
-                  System.out.println("1. Piedra");
-                  System.out.println("2. Papel");
-                  System.out.println("3. Tijera");
-                  System.out.print("Elige una opción: ");
-                  int var14 = var1.nextInt();
-                  int var19 = var2.nextInt(3) + 1;
-                  System.out.print("La computadora eligió: ");
-                  switch (var19) {
-                     case 1 -> System.out.println("Piedra");
-                     case 2 -> System.out.println("Papel");
-                     case 3 -> System.out.println("Tijera");
-                  }
+                            for (int j = 0; j < posiciones[i] && j < meta; j++) {
+                                System.out.print("■");
+                            }
 
-                  if (var14 == var19) {
-                     var3 += 10;
-                     System.out.println("Empate.");
-                  } else if ((var14 != 1 || var19 != 3) && (var14 != 2 || var19 != 1) && (var14 != 3 || var19 != 2)) {
-                     ++var6;
-                     System.out.println("Perdiste.");
-                  } else {
-                     ++var5;
-                     var3 += 20;
-                     System.out.println("¡Ganaste 20 monedas!");
-                  }
+                            System.out.println(" (" + posiciones[i] + "/" + meta + ")");
 
-                  System.out.println("Monedas actuales: " + var3);
-                  break;
-               }
+                            if (posiciones[i] >= meta && ganador == 0) {
+                                ganador = i + 1;
+                            }
+                        }
 
-               System.out.println("Falta de monedas, no puedes jugar.");
-               break;
-            case 6:
-               if (var3 < 10) {
-                  System.out.println("No tienes suficientes monedas.");
-                  break;
-               }
+                        if (ganador == 0) {
+                            System.out.println("\nPresiona ENTER para continuar...");
+                            teclado.nextLine();
+                        }
 
-               var3 -= 10;
-               ++var4;
-               System.out.println("CARRERA DE CABALLOS ");
-               System.out.print("Elige un caballo (1-5): ");
+                        System.out.println();
+                    }
 
-               int var8;
-               for(var8 = var1.nextInt(); var8 < 1 || var8 > 5; var8 = var1.nextInt()) {
-                  System.out.print("Elige un número válido (1-5): ");
-               }
+                    System.out.println("Ganó el caballo " + ganador);
 
-               var1.nextLine();
-               int[] var9 = new int[5];
-               byte var10 = 20;
-               int var11 = 0;
-               System.out.println("¡Comienza la carrera!");
+                    if (caballo == ganador) {
+                        monedas += 50;
+                        victorias++;
+                        System.out.println(" ¡Ganaste 50 monedas!");
+                    } else {
+                        derrotas++;
+                        System.out.println(" Perdiste la apuesta.");
+                    }
 
-               for(; var11 == 0; System.out.println()) {
-                  for(int var12 = 0; var12 < 5; ++var12) {
-                     var9[var12] += var2.nextInt(3) + 1;
-                     System.out.print("Caballo " + (var12 + 1) + ": ");
+                    System.out.println(" Monedas: " + monedas);
+                    break;
+                case 7:
+                    System.out.println("===== ESTADÍSTICAS =====");
+                    System.out.println("Monedas: " + monedas);
+                    System.out.println("Partidas jugadas: " + partidas);
+                    System.out.println("Victorias: " + victorias);
+                    System.out.println("Derrotas: " + derrotas);
 
-                     for(int var13 = 0; var13 < var9[var12] && var13 < var10; ++var13) {
-                        System.out.print("*");
-                     }
+                default:
+                    System.out.println("Opcion invalida");
+                    break;
+                case 8:
+                    System.out.println("FIN DEL CASINO");
+                    System.out.println("Monedas finales: " + monedas);
+                    System.out.println("Partidas jugadas: " + partidas);
+                    System.out.println("Victorias: " + victorias);
+                    System.out.println("Derrotas: " + derrotas);
+                    System.out.println("Gracias por jugar.");
+                    System.out.println("======================");
+                    break;
 
-                     System.out.println(" (" + var9[var12] + "/" + var10 + ")");
-                     if (var9[var12] >= var10 && var11 == 0) {
-                        var11 = var12 + 1;
-                     }
-                  }
+            }
+        }
 
-                  if (var11 == 0) {
-                     System.out.println("\nPresiona ENTER para continuar...");
-                     var1.nextLine();
-                  }
-               }
-
-               System.out.println("Ganó el caballo " + var11);
-               if (var8 == var11) {
-                  var3 += 50;
-                  ++var5;
-                  System.out.println(" ¡Ganaste 50 monedas!");
-               } else {
-                  ++var6;
-                  System.out.println(" Perdiste la apuesta.");
-               }
-
-               System.out.println(" Monedas: " + var3);
-               break;
-            case 7:
-               System.out.println("===== ESTADÍSTICAS =====");
-               System.out.println("Monedas: " + var3);
-               System.out.println("Partidas jugadas: " + var4);
-               System.out.println("Victorias: " + var5);
-               System.out.println("Derrotas: " + var6);
-            default:
-               System.out.println("Opcion invalida");
-               break;
-            case 8:
-               System.out.println("FIN DEL CASINO");
-               System.out.println("Monedas finales: " + var3);
-               System.out.println("Partidas jugadas: " + var4);
-               System.out.println("Victorias: " + var5);
-               System.out.println("Derrotas: " + var6);
-               System.out.println("Gracias por jugar.");
-               System.out.println("======================");
-         }
-      }
-
-   }
+    }
 }
